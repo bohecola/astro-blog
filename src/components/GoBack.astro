@@ -1,0 +1,45 @@
+---
+function useParentPath() {
+  // 获取当前路径
+  const { pathname } = Astro.url;
+
+  // 是否存在父级路径
+  const hasParentPath = pathname.lastIndexOf("/") > 0;
+
+  let parentPath = "/";
+
+  // 虚路径
+  const virtualPath = ["/posts", "/tags"];
+
+  // 尾斜线索引
+  const trailingSlashIndex = pathname.lastIndexOf("/");
+
+  // 是否是多级路径
+  const isMulti = trailingSlashIndex > 0;
+	// 多级路径
+	if (isMulti) {
+		// 截取路径
+		const slicedPath = pathname.slice(0, trailingSlashIndex);
+    // 不是虚路径
+    if (!virtualPath.includes(slicedPath)) {
+      // 返回父级路由
+      parentPath = slicedPath;
+    }
+	}
+
+  return {
+    hasParentPath,
+    parentPath,
+  };
+}
+
+const { hasParentPath, parentPath } = useParentPath(); 
+---
+
+{
+  hasParentPath && (
+    <a href={parentPath} class="font-mono cursor-pointer">
+      > cd ..
+    </a>
+  )
+}

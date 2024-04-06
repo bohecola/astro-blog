@@ -1,0 +1,45 @@
+---
+const navigation = [
+	{ path: "/", title: "Blog", icon: "i-ri-article-line" },
+	{ path: "/english", title: "English", icon: "i-material-symbols-book-2-outline-rounded" },
+	{ path: "/about", title: "About", icon: "i-carbon-person" }
+];
+---
+
+<header class="sticky top-0 flex p-5 z-10 bg-[--bg] border-b dark:border-zinc-800">
+  <div class="flex-1" />
+  <nav class="flex gap-4">
+    {
+      navigation.map(({ path, title, icon }) => {
+        return (
+          <a href={path}>
+            <span class="max-md:hidden">{title}</span>
+            <span class={`md:hidden ${icon}`} />
+          </a>
+        )
+      })
+    }
+    <a
+      title="Github"
+      href="https://github.com/bohecola"
+      target="_blank"
+    >
+      <span class="i-carbon-logo-github" />
+    </a>
+  </nav>
+</header>
+
+<style lang="scss">
+  header {
+    nav {
+      a {
+        opacity: .7;
+        transition: opacity .2s ease;
+        &:hover, &.active {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  </style>
+  

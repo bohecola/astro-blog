@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './theme.scss';
+@import "./mixins.scss";
+
+@layer base {
+  html {
+    @apply snap-y scroll-pt-20 scroll-smooth font-sans;
+  }
+
+  h2, h3, h4, h5, h6 {
+    @apply relative;
+
+    // 标题 hover,focus 时的锚点样式 
+    &:hover {
+      .header-anchor {
+        @apply opacity-50;
+      }
+    }
+  }
+
+  article {
+    img {
+      @apply mx-auto;
+    }
+  }
+}
+
+@layer components {
+  // 锚点样式
+  .header-anchor {
+    border: none !important;
+    // 左移-不透明-无下划线
+    @apply float-left -ml-6 pr-2 opacity-0 no-underline;
+  }
+}
+
+@layer utilities {
+  .btn {
+    @apply px-4 rounded-sm cursor-pointer;
+  }
+
+  .tag {
+    @apply px-2 py-1 rounded-sm cursor-pointer text-xs;
+  }
+
+  .cyan-normal {
+    @apply text-cyan-700 bg-cyan-700 hover:text-cyan-600 dark:text-cyan-600 dark:hover:text-cyan-500 bg-opacity-20
+  }
+  .cyan-active {
+    @apply text-cyan-400 bg-cyan-700 hover:bg-cyan-600 dark:text-cyan-500 dark:bg-cyan-900 dark:hover:bg-cyan-800
+  }
+
+  .sky-normal {
+    @apply text-sky-700 bg-sky-700 hover:text-sky-600 dark:text-sky-600 dark:hover:text-sky-500 bg-opacity-20
+  }
+  .sky-active {
+    @apply text-sky-400 bg-sky-700 hover:bg-sky-600 dark:text-sky-500 dark:bg-sky-900 dark:hover:bg-sky-800
+  }
+
+  .green-normal {
+    @apply text-green-700 bg-green-700 hover:text-green-600 dark:text-green-600 dark:hover:text-green-500 bg-opacity-20
+  }
+  .green-active {
+    @apply text-green-400 bg-green-700 hover:bg-green-600 dark:text-green-500 dark:bg-green-900 dark:hover:bg-green-800
+  }
+
+  .curtain {
+    @apply absolute right-0 -bottom-[33px] w-full h-8;
+
+    &::after {
+      @apply block content-[''] w-full h-8 bg-gradient-to-b from-[--bg] to-transparent;
+    }
+  }
+}
+
+// custom scroll bar
+.scroll-bar {
+  @include custom-scrollbar(rgba(144, 147, 153, 0.3), rgba(144, 147, 153, 0.5), rgba(144, 147, 153, 0.1));
+}
+
+// fix medium-zoom overlay z-index
+.medium-zoom-overlay,
+.medium-zoom-image--opened {
+  z-index: 999;
+}

@@ -1,0 +1,52 @@
+---
+
+import { getCollection } from 'astro:content';
+import { sortByDate } from '../../utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPost from '../../components/BlogPost.astro';
+
+export async function getStaticPaths() {
+
+  // 获取所有文章
+  const posts = await getCollection('posts', ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
+
+  // 倒叙
+  const descPosts = sortByDate(posts);
+
+  // 获取所有标签
+  const uniqueTags = [...new Set(posts.map((post) => post.data.tags).flat())]
+
+  // 生成标签的路径
+  return uniqueTags.map((tag) => {
+    // 根据当前的标签过滤出对应的文章
+    const filteredPosts = descPosts.filter((post) => 
+      post.data.tags.includes(tag)
+    );
+
+    return {
+      params: { tag },
+      props: { posts: filteredPosts }
+    }
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout title="Home">
+  <div class="not-prose">
+    <h1 class="text-3xl font-bold mb-6">{tag}</h1>
+    <ul>
+      {
+        posts.map((post) => {
+          return (
+            <BlogPost slug={post.slug} title={post.data.title} pubDate={post.data.pubDate} />
+          )
+        })
+      }
+    </ul>
+  </div>
+</BaseLayout>
