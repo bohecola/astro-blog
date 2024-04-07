@@ -1,4 +1,6 @@
 ---
+import ModeToggle from "./ModeToggle.astro";
+
 const navigation = [
 	{ href: "/", title: "Blog", icon: "i-ri-article-line" },
 	{ href: "/english", title: "English", icon: "i-material-symbols-book-2-outline-rounded" },
@@ -42,6 +44,10 @@ const isActive = (href: string) => {
       aria-label="bohecola's github"
     >
       <span class="i-carbon-logo-github" />
+    </a>
+
+    <a>
+      <ModeToggle />
     </a>
   </nav>
 </header>
