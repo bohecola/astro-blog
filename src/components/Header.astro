@@ -1,18 +1,34 @@
 ---
 const navigation = [
-	{ path: "/", title: "Blog", icon: "i-ri-article-line" },
-	{ path: "/english", title: "English", icon: "i-material-symbols-book-2-outline-rounded" },
-	{ path: "/about", title: "About", icon: "i-carbon-person" }
+	{ href: "/", title: "Blog", icon: "i-ri-article-line" },
+	{ href: "/english", title: "English", icon: "i-material-symbols-book-2-outline-rounded" },
+	{ href: "/about", title: "About", icon: "i-carbon-person" }
 ];
+
+// 当前路径
+const { pathname } = Astro.url;
+
+// 导航是否高亮
+const isActive = (href: string) => {
+  // 首页导航高亮处理
+  if (href === '/') {
+    return pathname === '/' || pathname.includes('/blog/')
+  }
+  // 其他导航高亮处理
+  return pathname.includes(href);
+}
 ---
 
 <header class="sticky top-0 flex p-5 z-10 bg-[--bg] border-b dark:border-zinc-800">
   <div class="flex-1" />
   <nav class="flex gap-4">
     {
-      navigation.map(({ path, title, icon }) => {
+      navigation.map(({ href, title, icon }) => {
         return (
-          <a href={path}>
+          <a
+            href={href}
+            class={isActive(href) ? 'active' : ''}
+          >
             <span class="max-md:hidden">{title}</span>
             <span class={`md:hidden ${icon}`} />
           </a>
