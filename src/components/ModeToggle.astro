@@ -5,113 +5,33 @@
   id="modeToggle"
 />
 
-<!-- <script is:inline>
-  // 默认主题
-  const defaultTheme = 'dark';
-  // 存储
-  const storage = {
-    themeKey: 'theme',
-    get(key) {
-      return localStorage.getItem(key);
-    },
-    set(key, value) {
-      localStorage.setItem(key, value);
-    },
-    getTheme() {
-      return this.get(this.themeKey)
-    },
-    setTheme(value) {
-      this.set(this.themeKey, value)
-    }
-  }
-  initTheme();
-  // 初始化主题
-  function initTheme() {
-    const theme = getTheme() || defaultTheme;
-    applyTheme(theme);
-    // storage.setTheme(theme);
-  }
-  // 获取主题
-  function getTheme() {
-    // 1. 从 localStorage 中获取
-    if (typeof localStorage !== 'undefined' && storage.getTheme()) {
-      return storage.getTheme();
-    }
-    // 2. 从系统主题中获取
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    // 3. 回退明亮模式
-    return 'light';
-  }
-  // 应用主题
-  function applyTheme(theme) {
-    if (theme === 'light') {
-      document.documentElement.classList.remove('dark');
-    } else {
-      document.documentElement.classList.add('dark');
-    }
-  }
-</script> -->
-
 <script>
+  // 在页面导航结束时触发的事件，在新页面对用户可见且阻塞样式和脚本加载完成后。你可以在 document 上监听此事件。<ViewTransitions /> 组件在预渲染页面的初始页面导航以及任何后续导航（向前或向后）时都会触发此事件。
   document.addEventListener('astro:page-load', () => {
-    // 默认主题
-    const defaultTheme = 'dark';
-    // 存储
-    const storage = {
-      themeKey: 'theme',
-      get(key: string) {
-        return localStorage.getItem(key);
-      },
-      set(key: string, value: string) {
-        localStorage.setItem(key, value);
-      },
-      getTheme() {
-        return this.get(this.themeKey)
-      },
-      setTheme(value: string) {
-        this.set(this.themeKey, value)
-      }
-    }
-    initTheme();
-    // 初始化主题
-    function initTheme() {
-      const theme = getTheme() || defaultTheme;
-      applyTheme(theme);
-      storage.setTheme(theme);
-    }
-    // 获取主题
-    function getTheme() {
-      // 1. 从 localStorage 中获取
-      if (typeof localStorage !== 'undefined' && storage.getTheme()) {
-        return storage.getTheme();
-      }
-      // 2. 从系统主题中获取
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      }
-      // 3. 回退明亮模式
-      return 'light';
-    }
+    // 得到主题
+    const storedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('theme');
+    const theme = storedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
     // 应用主题
-    function applyTheme(theme: string) {
-      if (theme === 'light') {
-        document.documentElement.classList.remove('dark');
-      } else {
-        document.documentElement.classList.add('dark');
-      }
-    }
-    // 获取 DOM 元素
+    theme === 'light'
+      ? document.documentElement.classList.remove('dark')
+      : document.documentElement.classList.add('dark');
+
+    // 存储主题
+    localStorage.setItem('theme', theme);
+
+    // 获取用于切换的 DOM 元素
     const oModeToggle = document.getElementById("modeToggle");
-    // 切换明暗模式
+    // 点击事件处理函数
     const handleModeToggle = () => {
+      // 根元素
       const element = document.documentElement;
-      // 切换
+      // 根元素切换 dark 类
       element.classList.toggle("dark");
 
       const isDark = element.classList.contains("dark");
-      storage.setTheme(isDark ? "dark" : "light")
+      // 存储切换的主题
+      localStorage.setItem('theme', isDark ? "dark" : "light")
     }
     // 绑定事件
     oModeToggle?.addEventListener("click", handleModeToggle);
