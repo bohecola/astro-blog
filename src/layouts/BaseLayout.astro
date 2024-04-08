@@ -1,10 +1,12 @@
 ---
+import '../styles/base.scss';
+
 import { ViewTransitions } from "astro:transitions";
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import GoBack from '../components/GoBack.astro';
 import BackToTop from '../components/vue/BackToTop.vue';
-import '../styles/base.scss';
+import ThemeProvider from "../components/ThemeProvider.astro";
 
 interface Props {
 	title: string;
@@ -23,6 +25,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<ViewTransitions />
+		<ThemeProvider />
 	</head>
 	<body>
 		<Header />
