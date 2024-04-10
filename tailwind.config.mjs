@@ -54,7 +54,7 @@ export default {
 	plugins: [
 		require("@tailwindcss/typography"),
 		iconsPlugin({
-			collections: getIconCollections(["mdi", "ant-design", "carbon", "material-symbols", "ri"]),
+			collections: getIconCollections(["mdi", "ant-design", "carbon", "material-symbols", "ri", "ph", "tdesign"]),
 			scale: 1.2,
 			extraProperties: {
 				"vertical-align": "text-bottom"
