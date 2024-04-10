@@ -61,10 +61,8 @@ const { toc } = Astro.props;
   }
 
   window.addEventListener("resize", () => {
-    if (window.innerWidth < xl) {
-      isFold = true;
-      fold();
-    }
+    isFold = window.innerWidth < xl;
+    isFold ? fold() : expand();
   });
 
   oTocToggle?.addEventListener("click", () => {
