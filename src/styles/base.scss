@@ -35,9 +35,7 @@
     // 左移-不透明-无下划线
     @apply float-left -ml-6 pr-2 opacity-0 no-underline;
   }
-}
 
-@layer utilities {
   .btn {
     @apply px-4 rounded-sm cursor-pointer;
   }
@@ -45,7 +43,9 @@
   .tag {
     @apply px-2 py-1 rounded-sm cursor-pointer text-xs;
   }
+}
 
+@layer utilities {
   .cyan-normal {
     @apply text-cyan-700 bg-cyan-700 hover:text-cyan-600 dark:text-cyan-600 dark:hover:text-cyan-500 bg-opacity-20
   }
@@ -73,6 +73,13 @@
     &::after {
       @apply block content-[''] w-full h-8 bg-gradient-to-b from-[--bg] to-transparent;
     }
+  }
+
+  .no-scroll {
+    overflow: hidden; /* 禁止滚动条 */
+    position: fixed; /* 防止移动设备上的滚动 */
+    width: 100%; /* 防止背景跳动 */
+    height: 100%; /* 防止背景跳动 */
   }
 }
 

@@ -12,12 +12,64 @@ interface Props {
 const { toc } = Astro.props;
 ---
 
-<aside class="fixed top-[66px] right-0 transition-transform max-xl:hidden z-20">
+<aside id="toc" class="fixed top-[66px] right-0 transition-transform translate-x-full xl:translate-x-0 z-20 ">
+  <div class="flex items-center justify-center absolute w-10 h-10 -translate-x-[100%] text-xl border-l border-b dark:border-zinc-800 bg-[--bg]">
+    <button id="tocToggle" class="i-tdesign-menu-unfold"></button>
+  </div>
   <nav class="
     py-5 w-[30ch] h-[calc(100vh-66px)] border-l
     overflow-y-auto scroll-bar
-    bg-[--bg] dark:border-zinc-800">
+  dark:border-zinc-800 bg-[--bg]">
     <h2 class="mx-7 text-sm opacity-80">{toc.label}</h2>
     <TableOfContentsLists toc={toc.items} />
   </nav>
 </aside>
+
+<script>
+  const oToc = document.querySelector('#toc');
+  const oTocToggle = document.querySelector('#tocToggle');
+
+  const oMain = document.querySelector('main');
+  const oBody = document.querySelector('body');
+
+  const oMask = document.createElement('div');
+  oMask.className = `absolute inset-0 bg-black bg-opacity-50 z-10`;
+
+  const xl = 1280;
+  let isFold = window.innerWidth < xl;
+
+  function fold() {
+    oTocToggle!.className = `i-tdesign-menu-unfold`;
+    if (window.innerWidth < xl) {
+      oMain?.contains(oMask) && oMain.removeChild(oMask);
+      oBody?.classList.contains('no-scroll') && oBody.classList.remove('no-scroll');
+      oToc?.classList.add(`translate-x-full`);
+    } else {
+      oToc?.classList.remove(`xl:translate-x-0`);
+    }
+  }
+
+  function expand() {
+    oTocToggle!.className = `i-tdesign-menu-fold`;
+    if (window.innerWidth < xl) {
+      oMain?.appendChild(oMask);
+      oBody?.classList.add('no-scroll');
+      oToc?.classList.remove(`translate-x-full`);
+    } else {
+      oToc?.classList.add(`xl:translate-x-0`);
+    }
+  }
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth < xl) {
+      isFold = true;
+      fold();
+    }
+  });
+
+  oTocToggle?.addEventListener("click", () => {
+    isFold = !isFold;
+    isFold ? fold() : expand();
+  });
+  oMask.addEventListener("click", fold);
+</script>
