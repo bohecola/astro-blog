@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { throttle } from 'lodash-es';
 
 const isActive = ref(false);
 
-window.addEventListener("scroll", () => {
+const scrollHanlder = throttle(() => {  
 	isActive.value = window.scrollY > 100;
+}, 200, {
+  trailing: true
 });
+
+window.addEventListener("scroll", scrollHanlder);
 
 const backToTop = () => {
 	window.scrollTo({
