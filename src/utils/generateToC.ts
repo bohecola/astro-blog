@@ -17,7 +17,9 @@ export function generateToC(
   { minHeadingLevel, maxHeadingLevel, title }: TocOpts
 ) {
   headings = headings.filter(({ depth }) => depth >= minHeadingLevel && depth <= maxHeadingLevel);
-  const toc: TocItem[] = [{ depth: 2, slug: PAGE_TITLE_ID, text: title, children: [] }];
+  const toc: TocItem[] = [
+    // { depth: 2, slug: PAGE_TITLE_ID, text: title, children: [] }
+  ];
   for (const heading of headings) {
     injectChild(toc, { ...heading, children: [] });
   }
@@ -32,4 +34,17 @@ function injectChild(items: TocItem[], item: TocItem): void {
   } else {
     return injectChild(lastItem.children, item);
   }
+}
+
+// 根据 headings 生成 ToC
+export function getToC(headings: MarkdownHeading[]) {
+  const tocConfig = { 
+    minHeadingLevel: 2,
+    maxHeadingLevel: 4
+  };
+
+  return {
+    items: generateToC(headings, { ...tocConfig, title: 'overview' }),
+    label: 'On This Page'
+  };
 }

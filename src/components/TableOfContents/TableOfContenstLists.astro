@@ -1,0 +1,24 @@
+---
+import type { TocItem } from '../../utils/generateToC';
+
+interface Props {
+  toc: TocItem[]
+}
+
+const { toc } = Astro.props;
+---
+<ul class="m-0 list-none">
+  {
+    toc && toc.map((heading) => (
+      <li class="max-w-30ch text-sm">
+        <a href={'#' + heading.slug} class="font-mono opacity-80 hover:opacity-100">
+          <span class="opacity-50">{heading.depth > 2 ? '>' : '#'}</span>
+          <span>{heading.text}</span>
+        </a>
+        {heading.children.length > 0 && (
+          <Astro.self toc={heading.children} />
+        )}
+      </li>
+    ))
+  }
+</ul>

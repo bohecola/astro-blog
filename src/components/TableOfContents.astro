@@ -1,0 +1,23 @@
+---
+import type { TocItem } from '../utils/generateToC';
+import TableOfContentsLists from './TableOfContents/TableOfContenstLists.astro';
+
+interface Props {
+  toc: {
+    items: TocItem[];
+    label?: string;
+  }
+}
+
+const { toc } = Astro.props;
+---
+
+<aside class="fixed top-[66px] right-0 transition-transform max-xl:hidden z-20">
+  <nav class="
+    py-5 w-[30ch] h-[calc(100vh-66px)] border-l
+    overflow-y-auto scroll-bar
+    bg-[--bg] dark:border-zinc-800">
+    <h2 class="mx-7 text-sm opacity-80">{toc.label}</h2>
+    <TableOfContentsLists toc={toc.items} />
+  </nav>
+</aside>
