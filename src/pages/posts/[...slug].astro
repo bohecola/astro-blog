@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
+import { generateToC } from "../../utils/generateToC";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('posts');
@@ -10,7 +11,13 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
+
+const toc = generateToC(headings, { 
+  minHeadingLevel: 4,
+  maxHeadingLevel: 6,
+  title: 'overview'
+});
 ---
 
 <MarkdownPostLayout frontmatter={entry.data}>
