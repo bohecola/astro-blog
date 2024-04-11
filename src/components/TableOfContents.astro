@@ -19,55 +19,58 @@ const { toc } = Astro.props;
   <nav class="
     py-5 w-[30ch] h-[calc(100vh-66px)] border-l
     overflow-y-auto scroll-bar
-  dark:border-zinc-800 bg-[--bg]">
+    dark:border-zinc-800 bg-[--bg]">
     <h2 class="mx-7 text-sm opacity-80">{toc.label}</h2>
     <TableOfContentsLists toc={toc.items} />
   </nav>
 </aside>
 
 <script>
-  const oToc = document.querySelector('#toc');
-  const oTocToggle = document.querySelector('#tocToggle');
+  // 在页面导航结束时触发的事件，在新页面对用户可见且阻塞样式和脚本加载完成后。你可以在 document 上监听此事件。<ViewTransitions /> 组件在预渲染页面的初始页面导航以及任何后续导航（向前或向后）时都会触发此事件。
+  document.addEventListener("astro:page-load", () => {
+    const oToc = document.querySelector('#toc');
+    const oTocToggle = document.querySelector('#tocToggle');
 
-  const oMain = document.querySelector('main');
-  const oBody = document.querySelector('body');
+    const oMain = document.querySelector('main');
+    const oBody = document.querySelector('body');
 
-  const oMask = document.createElement('div');
-  oMask.className = `absolute inset-0 bg-black bg-opacity-50 z-10`;
+    const oMask = document.createElement('div');
+    oMask.className = `absolute inset-0 bg-black bg-opacity-50 z-10`;
 
-  const xl = 1280;
-  let isFold = window.innerWidth < xl;
+    const xl = 1280;
+    let isFold = window.innerWidth < xl;
 
-  function fold() {
-    oTocToggle!.className = `i-tdesign-menu-unfold`;
-    if (window.innerWidth < xl) {
-      oMain?.contains(oMask) && oMain.removeChild(oMask);
-      oBody?.classList.contains('no-scroll') && oBody.classList.remove('no-scroll');
-      oToc?.classList.add(`translate-x-full`);
-    } else {
-      oToc?.classList.remove(`xl:translate-x-0`);
+    function fold() {
+      oTocToggle!.className = `i-tdesign-menu-unfold`;
+      if (window.innerWidth < xl) {
+        oMain?.contains(oMask) && oMain.removeChild(oMask);
+        oBody?.classList.contains('no-scroll') && oBody.classList.remove('no-scroll');
+        oToc?.classList.add(`translate-x-full`);
+      } else {
+        oToc?.classList.remove(`xl:translate-x-0`);
+      }
     }
-  }
 
-  function expand() {
-    oTocToggle!.className = `i-tdesign-menu-fold`;
-    if (window.innerWidth < xl) {
-      oMain?.appendChild(oMask);
-      oBody?.classList.add('no-scroll');
-      oToc?.classList.remove(`translate-x-full`);
-    } else {
-      oToc?.classList.add(`xl:translate-x-0`);
+    function expand() {
+      oTocToggle!.className = `i-tdesign-menu-fold`;
+      if (window.innerWidth < xl) {
+        oMain?.appendChild(oMask);
+        oBody?.classList.add('no-scroll');
+        oToc?.classList.remove(`translate-x-full`);
+      } else {
+        oToc?.classList.add(`xl:translate-x-0`);
+      }
     }
-  }
 
-  window.addEventListener("resize", () => {
-    isFold = window.innerWidth < xl;
-    isFold ? fold() : expand();
-  });
+    window.addEventListener("resize", () => {
+      isFold = window.innerWidth < xl;
+      isFold ? fold() : expand();
+    });
 
-  oTocToggle?.addEventListener("click", () => {
-    isFold = !isFold;
-    isFold ? fold() : expand();
-  });
-  oMask.addEventListener("click", fold);
+    oTocToggle?.addEventListener("click", () => {
+      isFold = !isFold;
+      isFold ? fold() : expand();
+    });
+    oMask.addEventListener("click", fold);
+  })
 </script>
