@@ -46,8 +46,8 @@
 }
 
 @layer utilities {
-  .cyan-normal {
-    @apply text-cyan-700 bg-cyan-700 hover:text-cyan-600 dark:text-cyan-600 dark:hover:text-cyan-500 bg-opacity-20
+  .emerald-normal {
+    @apply text-white bg-emerald-600 hover:bg-emerald-500
   }
   .cyan-active {
     @apply text-cyan-400 bg-cyan-700 hover:bg-cyan-600 dark:text-cyan-500 dark:bg-cyan-900 dark:hover:bg-cyan-800
