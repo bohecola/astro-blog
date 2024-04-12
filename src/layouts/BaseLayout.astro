@@ -29,8 +29,9 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<Header />
-		<main class="px-7 py-10 overflow-x-hidden relative">
-			<div class="mx-auto prose dark:prose-invert prose-img:rounded prose-img:border">
+		<main class="relative px-7 py-10 overflow-x-hidden border-b border-b-slate-900/5 dark:border-b-slate-100/5">
+			<div class="absolute inset-0 bg-grid-slate-900/[0.04] dark:bg-grid-slate-400/[0.05] bg-bottom"></div>
+			<div class="relative mx-auto prose dark:prose-invert prose-img:rounded prose-img:border">
 				<slot />
 				<GoBack />
 			</div>
