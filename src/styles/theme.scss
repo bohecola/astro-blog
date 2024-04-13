@@ -3,7 +3,7 @@
   --bg: #fff;
 }
 
-.dark {
+:root.dark {
   --color: #fff;
   --bg: #111;
 }
@@ -11,4 +11,11 @@
 body {
   background-color: var(--bg);
   color: var(--color);
+}
+
+// dark 模式代码块颜色，以覆盖 shiki 的内联样式颜色
+:root.dark .astro-code,
+:root.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
 }
