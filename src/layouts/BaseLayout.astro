@@ -11,9 +11,10 @@ import ThemeProvider from "../components/ThemeProvider.astro";
 
 interface Props {
 	title: string;
+	showGoBack?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, showGoBack = true } = Astro.props;
 ---
 
 <!doctype html>
@@ -37,7 +38,7 @@ const { title } = Astro.props;
 			<!-- prose 样式 -->
 			<div class="relative mx-auto prose dark:prose-invert prose-img:rounded prose-img:border">
 				<slot />
-				<GoBack />
+				{showGoBack && <GoBack />}
 			</div>
 		</main>
 		<Footer />
