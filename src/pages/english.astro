@@ -1,8 +1,8 @@
 ---
-import dayjs from 'dayjs';
 import { getCollection } from 'astro:content';
 import { sortByDate } from '../utils';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogPost from '../components/BlogPost.astro';
 
 const posts = sortByDate(await getCollection('english', ({ data }) => {
   return import.meta.env.PROD ? data.draft !== true : true;
@@ -17,14 +17,7 @@ const posts = sortByDate(await getCollection('english', ({ data }) => {
       {
         posts.map((post) => {
           return (
-            <li class="mt-2 mb-6">
-              <a href={`/english/${post.slug}`}>
-                <div class="flex flex-col gap-1 mb-2 font-medium opacity-80 hover:opacity-100 md:flex-row md:gap-2 md:items-center">
-                  <span class="text-lg">{post.data.title}</span>
-                  <span class="text-sm opacity-70">{dayjs(post.data.pubDate).format('MMM DD, YYYY')}</span>
-                </div>
-              </a>
-            </li>
+            <BlogPost post={post} />
           )
         })
       }

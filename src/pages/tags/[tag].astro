@@ -43,7 +43,7 @@ const { posts } = Astro.props;
       {
         posts.map((post) => {
           return (
-            <BlogPost slug={post.slug} title={post.data.title} pubDate={post.data.pubDate} />
+            <BlogPost post={post} />
           )
         })
       }
