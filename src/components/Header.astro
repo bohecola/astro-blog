@@ -12,9 +12,9 @@ const { pathname } = Astro.url;
 
 // 导航是否高亮
 const isActive = (href: string) => {
-  // 首页导航高亮处理
+  // Blog 导航高亮处理
   if (href === '/') {
-    return pathname === '/' || pathname.includes('/blog/')
+    return pathname === '/' || pathname.includes('/posts/')
   }
   // 其他导航高亮处理
   return pathname.includes(href);
