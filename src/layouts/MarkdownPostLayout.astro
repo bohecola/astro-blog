@@ -1,5 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import type { InferEntrySchema } from 'astro:content';
+
+interface Props {
+  frontmatter: InferEntrySchema<'posts' | 'english' | 'other'>
+}
 
 const { frontmatter } = Astro.props;
 ---
