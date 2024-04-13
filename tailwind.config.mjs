@@ -27,8 +27,6 @@ export default {
 							borderWidth: "1px",
 							borderColor: "#ECEBE8",
 							borderRadius: theme("borderRadius.md"),
-							color: theme("colors.slate.800"),
-							backgroundColor: "#F8F8F8"
 						}
 					}
 				},
@@ -39,22 +37,19 @@ export default {
 						},
 						pre: {
 							borderColor: "#201E1B",
-							color: theme("colors.slate.200"),
-							backgroundColor: "#121110" // "rgb(0 0 0 / 50%)"
 						}
 					}
 				}
 			}),
 			fontFamily: {
 				mono: ["DM Mono", ...defaultTheme.fontFamily.mono]
-			},
-			backgroundImage: {
-				"grid-texture": "url('@/assets/img/grid.svg')"
 			}
 		}
 	},
 	plugins: [
+		// 排版插件
 		require("@tailwindcss/typography"),
+		// 图标插件
 		iconsPlugin({
 			collections: getIconCollections(["mdi", "ant-design", "carbon", "material-symbols", "ri", "ph", "tdesign"]),
 			scale: 1.2,
@@ -62,12 +57,14 @@ export default {
 				"vertical-align": "text-bottom"
 			}
 		}),
+		// 背景模糊
 		function ({ addVariant }) {
       addVariant(
         'supports-backdrop-blur',
         '@supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0))'
       )
 		},
+		// 背景网格图
 		function ({ matchUtilities, theme }) {
 			matchUtilities(
 				{
