@@ -12,8 +12,8 @@ interface Props {
 const { toc } = Astro.props;
 ---
 
-<aside id="toc" class="fixed top-[66px] right-0 transition-transform translate-x-full xl:translate-x-0 z-20 ">
-  <div class="flex items-center justify-center absolute w-10 h-10 -translate-x-[100%] text-xl border-l border-b dark:border-zinc-800 bg-[--bg]">
+<aside id="toc" class="fixed top-[66px] right-0 transition-transform translate-x-full xl:translate-x-0 z-20">
+  <div class="absolute flex items-center justify-center w-10 h-10 -translate-x-[100%] text-xl border-l border-b dark:border-zinc-800 bg-[--bg]">
     <button id="tocToggle" class="i-tdesign-menu-unfold"></button>
   </div>
   <nav class="
@@ -35,8 +35,6 @@ const { toc } = Astro.props;
     const oMask = document.createElement('div');
     oMask.className = `absolute inset-0 bg-black bg-opacity-50 z-10`;
 
-    const oBody = document.querySelector('body');
-
     const xl = 1280;
     let isFold = window.innerWidth < xl;
 
@@ -45,8 +43,8 @@ const { toc } = Astro.props;
       oTocToggle!.className = `i-tdesign-menu-unfold`;
       // 移动尺寸下收起
       if (window.innerWidth < xl) {
+        // 移除蒙层
         oMain?.contains(oMask) && oMain.removeChild(oMask);
-        oBody?.classList.contains('no-scroll') && oBody.classList.remove('no-scroll');
         oToc?.classList.add(`translate-x-full`);
       } else {
         // pc 尺寸下收起
@@ -59,8 +57,8 @@ const { toc } = Astro.props;
       oTocToggle!.className = `i-tdesign-menu-fold`;
       // 移动尺寸下展开
       if (window.innerWidth < xl) {
+        // 添加蒙层
         oMain?.appendChild(oMask);
-        oBody?.classList.add('no-scroll');
         oToc?.classList.remove(`translate-x-full`);
       } else {
         // pc 尺寸下展开

@@ -74,13 +74,6 @@
       @apply block content-[''] w-full h-8 bg-gradient-to-b from-[--bg] to-transparent;
     }
   }
-
-  .no-scroll {
-    overflow: hidden; /* 禁止滚动条 */
-    position: fixed; /* 防止移动设备上的滚动 */
-    width: 100%; /* 防止背景跳动 */
-    height: 100%; /* 防止背景跳动 */
-  }
 }
 
 // custom scroll bar
