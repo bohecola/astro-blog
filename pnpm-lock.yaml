@@ -43,6 +43,9 @@ devDependencies:
   '@egoist/tailwindcss-icons':
     specifier: ^1.7.4
     version: 1.7.4(tailwindcss@3.4.3)
+  '@fontsource/dm-mono':
+    specifier: ^5.0.19
+    version: 5.0.19
   '@iconify-json/ant-design':
     specifier: ^1.1.15
     version: 1.1.15
@@ -1015,6 +1018,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fontsource/dm-mono@5.0.19:
+    resolution: {integrity: sha512-he/hWl/7JwMgVDnWeuw0a4xh/06tozTXwhvb+/LzdrMlj3bqvrMs4Up4CbYBg7HlQcUtWUL6lPOUKHXWjq8Z/g==}
+    dev: true
 
   /@iconify-json/ant-design@1.1.15:
     resolution: {integrity: sha512-E8XLyDo2HWVeVT8ViNTxF2+0Vgcox8FC73G4v64AM+lvlWpERcY90g7jXoBOeykl1pQCf1awkQUwjkynZ8Xb7A==}

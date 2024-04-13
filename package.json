@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.7.4",
+    "@fontsource/dm-mono": "^5.0.19",
     "@iconify-json/ant-design": "^1.1.15",
     "@iconify-json/carbon": "^1.1.31",
     "@iconify-json/material-symbols": "^1.1.76",
