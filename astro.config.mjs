@@ -11,7 +11,7 @@ export default defineConfig({
     shikiConfig: {
       themes: {
         light: 'vitesse-light',
-        dark: 'vitesse-dark'
+        dark: 'vitesse-black'
       },
     }
   }
