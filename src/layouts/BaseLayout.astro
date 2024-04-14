@@ -1,4 +1,6 @@
 ---
+import { SITE } from "@/config";
+
 import "@fontsource/dm-mono";
 import '../styles/base.scss';
 
@@ -10,22 +12,37 @@ import BackToTop from '../components/vue/BackToTop.vue';
 import ThemeProvider from "../components/ThemeProvider.astro";
 
 interface Props {
-	title: string;
+	title?: string;
+	description?: string;
+	author?: string;
+	canonicalURL?: string;
 	showGoBack?: boolean;
 }
 
-const { title, showGoBack = true } = Astro.props;
+const { 
+  title = SITE.title,
+  author = SITE.author,
+  description = SITE.desc,
+	canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+	showGoBack = true
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonicalURL} />
 		<meta name="generator" content={Astro.generator} />
+
+    <!-- General Meta Tags -->
 		<title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content={author} />
+		
 		<ViewTransitions />
 		<ThemeProvider />
 	</head>

@@ -9,7 +9,11 @@ interface Props {
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout title={frontmatter.title}>
+<BaseLayout 
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+>
   <!-- 文章 -->
   <article>
     <slot />
