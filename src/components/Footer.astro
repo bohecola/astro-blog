@@ -1,7 +1,16 @@
+---
+import { SITE } from "@/config"
+---
+
 <footer class="p-6">
   <div class="prose dark:prose-invert mx-auto">
-    <p class="text-sm opacity-60">
-      2020-PRESENT © Cola
+    <p class="text-sm">
+      <span class="mr-2 opacity-60">2020-PRESENT © {SITE.author}</span>
+      <a 
+        href="/rss.xml"
+        title="rss"
+        class="opacity-60 hover:opacity-100 i-material-symbols-rss-feed">
+      </a>
     </p>
   </div>
 </footer>
