@@ -20,6 +20,11 @@
 - [ ] 文章搜索
 - [ ] 评论功能
 
+使用到的 Tailwind CSS 插件：
+
+[@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) - Tailwind CSS 官方排版插件\
+[@egoist/tailwindcss-icons](https://github.com/egoist/tailwindcss-icons) - 在 Tailwind CSS 中使用 [Iconify](https://iconify.design/) 图标
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
