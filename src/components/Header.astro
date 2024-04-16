@@ -23,32 +23,40 @@ const isActive = (href: string) => {
 
 <header class="sticky top-0 flex p-5 z-10 border-b dark:border-zinc-800 backdrop-blur supports-backdrop-blur:bg-[--bg]/60">
   <div class="flex-1" />
-  <nav class="flex gap-4">
-    {
-      navigation.map(({ href, title, icon }) => {
-        return (
-          <a
-            href={href}
-            class={isActive(href) ? 'active' : ''}
-          >
-            <span class="max-md:hidden">{title}</span>
-            <span class={`md:hidden ${icon}`} />
-          </a>
-        )
-      })
-    }
-    <a
-      title="Github"
-      href="https://github.com/bohecola"
-      target="_blank"
-      aria-label="bohecola's github"
-    >
-      <span class="i-carbon-logo-github" />
-    </a>
-
-    <a>
-      <ModeToggle />
-    </a>
+  <nav>
+    <ul class="flex gap-4">
+      {
+        navigation.map(({ href, title, icon }) => {
+          return (
+            <li>
+              <a
+                href={href}
+                class={isActive(href) ? 'active' : ''}
+              >
+                <span class="max-md:hidden">{title}</span>
+                <span class={`md:hidden ${icon}`} />
+              </a>  
+            </li>
+          )
+        })
+      }
+      <li>
+        <a
+          title="Github"
+          href="https://github.com/bohecola"
+          target="_blank"
+          aria-label="bohecola's github"
+        >
+          <span class="i-carbon-logo-github" />
+        </a>
+      </li>
+  
+      <li>
+        <a>
+          <ModeToggle />
+        </a>
+      </li>
+    </ul>
   </nav>
   <div class="curtain pointer-events-none" />
 </header>
