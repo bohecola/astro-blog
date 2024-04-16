@@ -19,6 +19,6 @@ const toc = getToC(headings);
 
 <MarkdownPostLayout frontmatter={entry.data}>
   <h1>{entry.data.title}</h1>
-  <Content />
   <TableOfContents toc={toc} />
+  <Content />
 </MarkdownPostLayout>
