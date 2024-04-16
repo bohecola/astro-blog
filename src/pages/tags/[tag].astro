@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import { sortByDate } from '../../utils';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPost from '../../components/BlogPost.astro';
+import GoBack from '../../components/GoBack.astro';
 
 export async function getStaticPaths() {
 
@@ -49,4 +50,5 @@ const { posts } = Astro.props;
       }
     </ul>
   </div>
+  <GoBack />
 </BaseLayout>
