@@ -38,8 +38,10 @@ const { isMulti, parentPath } = useParentPath();
 
 {
   isMulti && (
-    <a href={parentPath} class="font-mono cursor-pointer">
-      &gt; cd ..
-    </a>
+    <p>
+      <a href={parentPath} class="font-mono cursor-pointer">
+        &gt; cd ..
+      </a>
+    </p>
   )
 }

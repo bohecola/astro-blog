@@ -7,7 +7,6 @@ import '../styles/base.scss';
 import { ViewTransitions } from "astro:transitions";
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import GoBack from '../components/GoBack.astro';
 import BackToTop from '../components/vue/BackToTop.vue';
 import ThemeProvider from "../components/ThemeProvider.astro";
 
@@ -17,7 +16,6 @@ interface Props {
 	author?: string;
 	ogImage?:  string;
 	canonicalURL?: string;
-	showGoBack?: boolean;
 }
 
 const { 
@@ -26,7 +24,6 @@ const {
   description = SITE.desc,
 	ogImage = OG.ogImage,
 	canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
-	showGoBack = true
 } = Astro.props;
 
 const ogImageURL = new URL(ogImage ?? "og-image.jpg", Astro.url.origin).href;
@@ -68,7 +65,6 @@ const ogImageURL = new URL(ogImage ?? "og-image.jpg", Astro.url.origin).href;
 			<!-- prose 样式 -->
 			<div class="relative mx-auto prose dark:prose-invert prose-img:rounded prose-img:border">
 				<slot />
-				{showGoBack && <GoBack />}
 			</div>
 		</main>
 		<Footer />

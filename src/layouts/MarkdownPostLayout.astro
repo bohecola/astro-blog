@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import GoBack from '../components/GoBack.astro';
 import Comments from "../components/react/Comments.tsx";
 import type { InferEntrySchema } from 'astro:content';
 
@@ -19,5 +20,6 @@ const { frontmatter } = Astro.props;
   <article>
     <slot />
   </article>
+  <GoBack />
   <Comments client:only="react" />
 </BaseLayout>
