@@ -1,13 +1,13 @@
 ---
 import { getEntry } from "astro:content";
-import MarkdownPostLayout from "../layouts/MarkdownPostLayout.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const about = await getEntry('other', 'about');
 
 const { Content } = await about.render();
 ---
 
-<MarkdownPostLayout frontmatter={about.data}>
+<BaseLayout title={about.data.title} description={about.data.description}>
   <h1>{about.data.title}</h1>
   <Content />
-</MarkdownPostLayout>
+</BaseLayout>
