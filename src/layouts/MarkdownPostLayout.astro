@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import Comments from "../components/react/Comments.tsx";
 import type { InferEntrySchema } from 'astro:content';
 
 interface Props {
@@ -18,4 +19,5 @@ const { frontmatter } = Astro.props;
   <article>
     <slot />
   </article>
+  <Comments client:only="react" />
 </BaseLayout>
