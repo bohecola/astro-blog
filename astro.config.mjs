@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import vue from "@astrojs/vue";
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
 import { SITE } from './src/config';
@@ -14,7 +15,8 @@ export default defineConfig({
     tailwind(),
     mdx(),
     vue(),
-    sitemap()
+    sitemap(),
+    react()
   ],
   markdown: {
     shikiConfig: {
