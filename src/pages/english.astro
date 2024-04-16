@@ -17,7 +17,7 @@ const posts = sortByDate(await getCollection('english', ({ data }) => {
       {
         posts.map((post) => {
           return (
-            <BlogPost post={post} />
+            <BlogPost prefix='/english' post={post} />
           )
         })
       }
