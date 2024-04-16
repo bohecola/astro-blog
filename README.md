@@ -9,6 +9,7 @@
 - [x] RSS [@astrojs/rss](https://docs.astro.build/en/guides/rss/#setting-up-astrojsrss) - 生成 RSS 摘要
 - [x] 集成 [@astrojs/tailwind](https://docs.astro.build/zh-cn/guides/integrations-guide/tailwind/) 以使用 [tailwindcss](https://tailwindcss.com/) 
 - [x] 集成 [@astrojs/vue](https://docs.astro.build/zh-cn/guides/integrations-guide/vue/) 以使用 [vue](https://vuejs.org/)
+- [x] 集成 [@astrojs/react](https://docs.astro.build/en/guides/integrations-guide/react/) 以使用 [react](https://react.dev/)
 - [x] 动态生成 robots.txt - [具体配置](https://docs.astro.build/zh-cn/guides/integrations-guide/sitemap/#%E4%BD%BF%E7%94%A8)
 - [x] 基于 [Shiki](https://docs.astro.build/zh-cn/guides/integrations-guide/markdoc/#shiki) 的代码语法高亮
 - [x] 明暗模式
@@ -18,7 +19,7 @@
 - [x] 支持本地草稿
 - [x] 自定义 404 页面
 - [ ] 文章搜索
-- [ ] 评论功能
+- [x] 评论功能
 
 使用到的 Tailwind CSS 插件：
 
