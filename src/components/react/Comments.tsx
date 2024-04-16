@@ -17,7 +17,7 @@ function getCurrentTheme() {
 export default function Comments () {
   const initialTheme = getCurrentTheme();
 
-  const themeChangeHandler = ({ detail: { themeValue } }) => {
+  const themeChangeHandler = ({ detail: { themeValue } }: CustomEvent<ThemeData>) => {
     setTheme(themeValue);
   }
   const [theme, setTheme] = useState(initialTheme);
