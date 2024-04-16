@@ -4,3 +4,7 @@ export type Site = {
   desc: string;
   title: string;
 };
+
+export type OG_Type = {
+  ogImage?: string;
+}

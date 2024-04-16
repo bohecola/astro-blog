@@ -1,5 +1,5 @@
 ---
-import { SITE } from "@/config";
+import { SITE, OG } from "@/config";
 
 import "@fontsource/dm-mono";
 import '../styles/base.scss';
@@ -15,6 +15,7 @@ interface Props {
 	title?: string;
 	description?: string;
 	author?: string;
+	ogImage?:  string;
 	canonicalURL?: string;
 	showGoBack?: boolean;
 }
@@ -23,9 +24,12 @@ const {
   title = SITE.title,
   author = SITE.author,
   description = SITE.desc,
+	ogImage = OG.ogImage,
 	canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 	showGoBack = true
 } = Astro.props;
+
+const ogImageURL = new URL(ogImage ?? "og-image.jpg", Astro.url.origin).href;
 ---
 
 <!doctype html>
@@ -34,8 +38,9 @@ const {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="canonical" href={canonicalURL} />
 		<meta name="generator" content={Astro.generator} />
+
+		<link rel="canonical" href={canonicalURL} />
 		<!-- rss auto discovery -->
 		<link rel="alternate" type="application/rss+xml" title={SITE.title} href={`${SITE.website}rss.xml`} />
 
@@ -44,6 +49,12 @@ const {
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={ogImageURL} />
 		
 		<ViewTransitions />
 		<ThemeProvider />
@@ -61,6 +72,6 @@ const {
 			</div>
 		</main>
 		<Footer />
-		<BackToTop client:only />
+		<BackToTop client:only="vue" />
 	</body>
 </html>
