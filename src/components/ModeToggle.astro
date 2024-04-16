@@ -29,14 +29,14 @@
       // 根元素切换 dark 类
       const isDark = element.classList.toggle("dark");
 
-      const themeValue = isDark ? "dark" : "light"
-
-      // 存储切换的主题
-      localStorage.setItem('theme', themeValue);
-
+      // 切换后的主题
+      const toggledTheme = isDark ? "dark" : "light"
+      // 存储切换后的主题
+      localStorage.setItem('theme', toggledTheme);
+      // 派发自定义事件
       window.dispatchEvent(new CustomEvent("app:themechange", {
         detail: {
-          themeValue: themeValue
+          themeValue: toggledTheme
         }
       }));
     }
