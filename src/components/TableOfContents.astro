@@ -16,7 +16,7 @@ const { toc } = Astro.props;
   <div class="absolute flex items-center justify-center w-10 h-10 -translate-x-[100%] text-xl border-l border-b dark:border-zinc-800 bg-[--bg]">
     <button id="tocToggleBtn" class="i-tdesign-menu-unfold"></button>
   </div>
-  <nav class="
+  <nav id="tocNav" class="
     py-5 w-[30ch] h-[calc(100vh-66px)] border-l
     overflow-y-auto overscroll-contain scroll-bar
     dark:border-zinc-800 bg-[--bg]">
@@ -33,6 +33,7 @@ const { toc } = Astro.props;
   document.addEventListener("astro:page-load", () => {
     const oToc = document.querySelector('#toc');
     const oTocToggleBtn = document.querySelector('#tocToggleBtn');
+    const oTocNav = document.querySelector('#tocNav');
 
     const oMain = document.querySelector('main');
     const oMask = document.createElement('div');
@@ -117,5 +118,14 @@ const { toc } = Astro.props;
       isFold = true;
       fold();
     });
+
+    // 滚动高度没有超过元素高度时，禁止向上触发滚动链
+    if (oTocNav) {
+      if (oTocNav.scrollHeight <= oTocNav.clientHeight) {
+        oTocNav.addEventListener("touchmove", (e) => {
+          e.preventDefault();
+        });
+      }
+    }
   })
 </script>
