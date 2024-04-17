@@ -28,86 +28,94 @@ const { toc } = Astro.props;
 <script>
   import { debounce } from "lodash-es";
 
-  const oToc = document.querySelector('#toc');
-  const oTocToggleBtn = document.querySelector('#tocToggleBtn');
+  let hasTocResizeHandler = false;
 
-  const oMain = document.querySelector('main');
-  const oMask = document.createElement('div');
-  oMask.className = `absolute inset-0 bg-black bg-opacity-50 z-10`;
+  document.addEventListener("astro:page-load", () => {
+    const oToc = document.querySelector('#toc');
+    const oTocToggleBtn = document.querySelector('#tocToggleBtn');
 
-  const xl = 1280;
-  let isFold = window.innerWidth < xl;
+    const oMain = document.querySelector('main');
+    const oMask = document.createElement('div');
+    oMask.className = `absolute inset-0 bg-black bg-opacity-50 z-10`;
 
-  // 收起
-  function fold() {
-    // 确保按钮存在
-    if (oTocToggleBtn) {
-      oTocToggleBtn.className = 'i-tdesign-menu-unfold';
-    }
+    const xl = 1280;
+    let isFold = window.innerWidth < xl;
 
-    // 根据窗口尺寸判断如何收起
-    if (window.innerWidth < xl) {
-      // 移动尺寸下收起
-      if (oMain && oMask && oMain.contains(oMask)) {
-        // 移除蒙层，只有当 oMain 真正包含 oMask 时才尝试移除
-        oMain.removeChild(oMask);
+    // 收起
+    function fold() {
+      // 确保按钮存在
+      if (oTocToggleBtn) {
+        oTocToggleBtn.className = 'i-tdesign-menu-unfold';
       }
-      // 添加收起动画类
-      if (oToc) {
-        oToc.classList.add('translate-x-full');
-      }
-    } else {
-      // PC 尺寸下收起
-      if (oToc) {
-        oToc.classList.remove('xl:translate-x-0');
-      }
-    }
-  }
 
-  // 展开
-  function expand() {
-    // 确保按钮存在
-    if (oTocToggleBtn) {
-      oTocToggleBtn.className = 'i-tdesign-menu-fold';
-    }
-
-    // 根据窗口尺寸判断如何展开
-    if (window.innerWidth < xl) {
-      // 移动尺寸下展开
-      if (oMain && oMask) {
-        // 添加蒙层，确保 oMain 和 oMask 都存在
-        oMain.appendChild(oMask);
-      }
-      if (oToc) {
-        // 移除收起动画类，使目录展开
-        oToc.classList.remove('translate-x-full');
-      }
-    } else {
-      // PC 尺寸下展开
-      if (oToc) {
-        oToc.classList.add('xl:translate-x-0');
+      // 根据窗口尺寸判断如何收起
+      if (window.innerWidth < xl) {
+        // 移动尺寸下收起
+        if (oMain && oMask && oMain.contains(oMask)) {
+          // 移除蒙层，只有当 oMain 真正包含 oMask 时才尝试移除
+          oMain.removeChild(oMask);
+        }
+        // 添加收起动画类
+        if (oToc) {
+          oToc.classList.add('translate-x-full');
+        }
+      } else {
+        // PC 尺寸下收起
+        if (oToc) {
+          oToc.classList.remove('xl:translate-x-0');
+        }
       }
     }
-  }
 
-  // 调整尺寸的处理函数，并防抖处理
-  const debouncedResizeHandler = debounce(function () {
-    isFold = window.innerWidth < xl;
-    isFold ? fold() : expand();
-  }, 250)
+    // 展开
+    function expand() {
+      // 确保按钮存在
+      if (oTocToggleBtn) {
+        oTocToggleBtn.className = 'i-tdesign-menu-fold';
+      }
 
-  // 响应尺寸变化
-  window.addEventListener("resize", debouncedResizeHandler);
+      // 根据窗口尺寸判断如何展开
+      if (window.innerWidth < xl) {
+        // 移动尺寸下展开
+        if (oMain && oMask) {
+          // 添加蒙层，确保 oMain 和 oMask 都存在
+          oMain.appendChild(oMask);
+        }
+        if (oToc) {
+          // 移除收起动画类，使目录展开
+          oToc.classList.remove('translate-x-full');
+        }
+      } else {
+        // PC 尺寸下展开
+        if (oToc) {
+          oToc.classList.add('xl:translate-x-0');
+        }
+      }
+    }
 
-  // 折叠切换点击，确保按钮存在
-  oTocToggleBtn?.addEventListener("click", () => {
-    isFold = !isFold;
-    isFold ? fold() : expand();
-  });
+    // 调整尺寸的处理函数，并防抖处理
+    const debouncedResizeHandler = debounce(function () {
+      isFold = window.innerWidth < xl;
+      isFold ? fold() : expand();
+    }, 250);
 
-  // 蒙层点击，无需额外检查，脚本创建的元素直接绑定事件监听
-  oMask.addEventListener("click", () => {
-    isFold = true;
-    fold();
-  }); 
+    // window 对象在导航后会被保留，防止多次绑定 resize 事件处理函数
+    if (!hasTocResizeHandler) {
+      // 响应尺寸变化
+      window.addEventListener("resize", debouncedResizeHandler);
+      hasTocResizeHandler = true;
+    }
+
+    // 折叠切换点击，确保按钮存在
+    oTocToggleBtn?.addEventListener("click", () => {
+      isFold = !isFold;
+      isFold ? fold() : expand();
+    });
+
+    // 蒙层点击，无需额外检查，脚本创建的元素直接绑定事件监听
+    oMask.addEventListener("click", () => {
+      isFold = true;
+      fold();
+    });
+  })
 </script>
