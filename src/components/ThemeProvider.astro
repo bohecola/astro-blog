@@ -1,10 +1,38 @@
-
 {/* This is intentionally inlined to avoid FOUC. */}
 <script is:inline>
-  const storedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('theme');
-  const theme = storedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  function setDarkMode(document) {
+    const storedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('theme');
+    const theme = storedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
 
-  theme === 'light'
-    ? document.documentElement.classList.remove('dark')
-    : document.documentElement.classList.add('dark');
+    theme === 'light'
+      ? document.documentElement.classList.remove('dark')
+      : document.documentElement.classList.add('dark');
+
+    if (!storedTheme) {
+      // 存储主题
+      localStorage.setItem('theme', theme);
+    }
+  }
+  
+  setDarkMode(document);
+
+  // 在新文档（在准备阶段填充）替换当前文档之前触发的事件。此事件发生在视图过渡中，用户仍然可以看到旧页面的快照。
+  // 此事件可用于在交换发生之前进行更改。事件上的 newDocument 属性表示传入的文档。以下示例确保浏览器中的浅色或深色模式偏好设置在新页面中得到保留：
+  document.addEventListener('astro:before-swap', ev => {
+    // Pass the incoming document to set the theme on it
+    setDarkMode(ev.newDocument);
+  });
 </script>
+
+<!-- 客户端导航流程 https://docs.astro.build/en/guides/view-transitions/#client-side-navigation-process -->
+<!-- 当 <ViewTransitions /> 路由器被使用时，以下步骤将会产生 Astro 的客户端导航： -->
+<!-- 第5骤中，这个 <script> 在新页面的 <head> 中存在，会被保留 -->
+
+<!-- 脚本的重新执行 https://docs.astro.build/en/guides/view-transitions/#script-re-execution -->
+<!-- Astro 默认的打包模块脚本在初始执行之后将只会被执行一次。即使在页面过渡后，该脚本存在于新页面上，它也会被忽略。 -->
+<!-- 与打包的模块脚本不同，内联脚本 在用户访问网站期间，如果它们存在于被多次访问的页面上，就有可能被重新执行。 -->
+<!-- 当访客导航到一个没有该脚本的页面，然后再回到一个有该脚本的页面时，内联脚本也可能会重新执行。 -->
+
+<!-- data-astro-rerun https://docs.astro.build/zh-cn/guides/view-transitions/#data-astro-rerun -->
+<!-- 要强制内联脚本在每次过渡后重新执行，请添加 data-astro-rerun 属性。 -->
+<!-- 向脚本添加任何属性也会隐式地添加 is:inline，因此这只适用于未被 Astro 打包和处理的脚本。 -->
