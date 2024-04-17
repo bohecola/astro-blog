@@ -18,7 +18,7 @@ const { toc } = Astro.props;
   </div>
   <nav class="
     py-5 w-[30ch] h-[calc(100vh-66px)] border-l
-    overflow-y-auto scroll-bar
+    overflow-y-auto overscroll-contain scroll-bar
     dark:border-zinc-800 bg-[--bg]">
     <h2 class="mx-7 text-sm opacity-80">{toc.label}</h2>
     <TableOfContentsLists toc={toc.items} />
