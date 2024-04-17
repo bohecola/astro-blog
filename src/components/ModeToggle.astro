@@ -6,20 +6,9 @@
 />
 
 <script>
-  // 在页面导航结束时触发的事件，在新页面对用户可见且阻塞样式和脚本加载完成后。你可以在 document 上监听此事件。<ViewTransitions /> 组件在预渲染页面的初始页面导航以及任何后续导航（向前或向后）时都会触发此事件。
+  // 在页面导航结束时触发的事件，在新页面对用户可见且阻塞样式和脚本加载完成后。你可以在 document 上监听此事件。
+  // <ViewTransitions /> 组件在预渲染页面的初始页面导航以及任何后续导航（向前或向后）时都会触发此事件。
   document.addEventListener('astro:page-load', () => {
-    // 得到主题
-    const storedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('theme');
-    const theme = storedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-
-    // 应用主题
-    theme === 'light'
-      ? document.documentElement.classList.remove('dark')
-      : document.documentElement.classList.add('dark');
-
-    // 存储主题
-    localStorage.setItem('theme', theme);
-
     // 获取用于切换的 DOM 元素
     const oModeToggle = document.getElementById("modeToggleBtn");
     // 点击事件处理函数
