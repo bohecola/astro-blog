@@ -10,16 +10,16 @@
 - [x] 集成 [@astrojs/tailwind](https://docs.astro.build/zh-cn/guides/integrations-guide/tailwind/) 以使用 [tailwindcss](https://tailwindcss.com/) 
 - [x] 集成 [@astrojs/vue](https://docs.astro.build/zh-cn/guides/integrations-guide/vue/) 以使用 [vue](https://vuejs.org/)
 - [x] 集成 [@astrojs/react](https://docs.astro.build/en/guides/integrations-guide/react/) 以使用 [react](https://react.dev/)
-- [x] 动态生成 robots.txt - [具体配置](https://docs.astro.build/zh-cn/guides/integrations-guide/sitemap/#%E4%BD%BF%E7%94%A8)
+- [x] 动态生成 robots.txt - [具体配置](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
 - [x] 基于 [Shiki](https://docs.astro.build/zh-cn/guides/integrations-guide/markdoc/#shiki) 的代码语法高亮
-- [x] 明暗模式
-- [x] 响应式布局
+- [x] 明暗模式 - 适配 giscus 和 DocSearch 的深浅主题切换
+- [x] 响应式布局 - 基于 [tailwindcss 响应式设计](https://tailwindcss.com/docs/responsive-design)
 - [x] 博客标签分类
 - [x] 生成博客目录 TableOfContents
-- [x] 支持本地草稿
-- [x] 自定义 404 页面
-- [ ] 文章搜索
-- [x] 评论功能
+- [x] 开发模式下预览草稿
+- [x] 自定义配置 404 错误页面 - [具体配置](https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page)
+- [x] 文章搜索 - [DocSearch](https://docsearch.algolia.com/)
+- [x] 评论功能 - [giscus](https://giscus.app/) 一个基于 [GitHub Discussions](https://docs.github.com/en/discussions) 实现的评论系统
 
 使用到的 Tailwind CSS 插件：
 
