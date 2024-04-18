@@ -21,8 +21,15 @@ const isActive = (href: string) => {
 }
 ---
 
-<header class="sticky top-0 flex p-5 z-10 border-b dark:border-zinc-800 backdrop-blur supports-backdrop-blur:bg-[--bg]/60">
-  <div class="flex-1" />
+<header 
+  class="
+    sticky top-0 px-6 py-4 h-[--headerH]
+    flex items-center justify-between md:justify-end gap-6 
+    z-10 border-b dark:border-zinc-800
+    backdrop-blur supports-backdrop-blur:bg-[--bg]/60
+  "
+>
+  <div id="docsearch"></div>
   <nav>
     <ul class="flex gap-4">
       {

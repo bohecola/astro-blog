@@ -28,6 +28,9 @@
           themeValue: toggledTheme
         }
       }));
+      
+      // 适配 docsearch 主题
+      document.documentElement.dataset.theme = toggledTheme;
     }
     // 绑定事件
     oModeToggle?.addEventListener("click", handleModeToggle);
