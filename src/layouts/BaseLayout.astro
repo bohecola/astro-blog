@@ -52,6 +52,9 @@ const ogImageURL = new URL(ogImage ?? "og-image.jpg", Astro.url.origin).href;
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:image" content={ogImageURL} />
+
+		<!-- docsearch -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"/></pre></li>
 		
 		<ViewTransitions />
 		<ThemeProvider />
@@ -69,5 +72,17 @@ const ogImageURL = new URL(ogImage ?? "og-image.jpg", Astro.url.origin).href;
 		</main>
 		<Footer />
 		<BackToTop client:only="vue" />
+
+		<!-- docsearch -->
+		<script is:inline src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+		<script is:inline type="text/javascript" >
+			docsearch({
+				appId: "LQ49897Q17",
+				apiKey: "6d9299b3fbdeec127738994dae7b0acc",
+				indexName: "deore",
+				container: '#docsearch',
+				debug: true 
+			});
+		</script>
 	</body>
 </html>

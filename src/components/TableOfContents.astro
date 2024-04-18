@@ -12,12 +12,12 @@ interface Props {
 const { toc } = Astro.props;
 ---
 
-<aside id="toc" class="fixed top-[66px] right-0 transition-transform translate-x-full xl:translate-x-0 z-30 touch-none">
+<aside id="toc" class="fixed top-[--headerH] right-0 transition-transform translate-x-full xl:translate-x-0 z-30 touch-none">
   <div class="absolute flex items-center justify-center w-10 h-10 -translate-x-[100%] text-xl border-l border-b dark:border-zinc-800 bg-[--bg]">
     <button id="tocToggleBtn" class="i-tdesign-menu-unfold"></button>
   </div>
   <nav id="tocNav" class="
-    py-5 w-[30ch] h-[calc(100vh-66px)] border-l
+    py-5 w-[30ch] h-[calc(100vh-var(--headerH))] border-l
     overflow-y-auto overscroll-contain scroll-bar
     dark:border-zinc-800 bg-[--bg]">
     <h2 class="mx-7 text-sm opacity-80">{toc.label}</h2>
@@ -37,7 +37,7 @@ const { toc } = Astro.props;
 
     const oMain = document.querySelector('main');
     const oMask = document.createElement('div');
-    oMask.className = `fixed inset-0 w-screen h-[calc(100vh-66px)] top-[66px] bg-black bg-opacity-50 z-20 touch-none`;
+    oMask.className = `fixed inset-0 w-screen h-[calc(100vh-var(--headerH))] top-[--headerH] bg-black bg-opacity-50 z-20 touch-none`;
 
     const xl = 1280;
     let isFold = window.innerWidth < xl;
