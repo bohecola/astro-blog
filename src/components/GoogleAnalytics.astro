@@ -1,0 +1,27 @@
+---
+interface Props {
+  /**
+   * Google Analytics 4 ID.
+   *
+   * **Default**: `'G-XXXXXXXXXX'`
+   * */
+  id: string
+}
+
+const { id } = Astro.props;
+
+const url = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+---+
+
+<script async src={url} is:inline>
+  // _
+</script>
+
+<script is:inline define:vars={{ id: id }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', id);
+</script>
