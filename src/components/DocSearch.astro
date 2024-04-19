@@ -1,0 +1,39 @@
+---
+interface Props {
+  appId: string;
+  apiKey: string;
+  indexName: string;
+  container?: string;
+  debug?: boolean;
+}
+
+const {
+  appId,
+  apiKey,
+  indexName,
+  container = '#docsearch',
+  debug = false
+} = Astro.props;
+---
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+<script 
+  is:inline
+  type="text/javascript"
+  define:vars={{ 
+    appId,
+    apiKey,
+    indexName,
+    container,
+    debug 
+  }}
+  data-astro-rerun
+>
+  docsearch({
+    appId: appId,
+    apiKey: apiKey,
+    indexName: indexName,
+    container: container,
+    debug: debug
+  });
+</script>
