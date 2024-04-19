@@ -81,6 +81,13 @@
   @include custom-scrollbar(rgba(144, 147, 153, 0.3), rgba(144, 147, 153, 0.5), rgba(144, 147, 153, 0.1));
 }
 
+// mobile adaptatioon
+@media (max-width: 768px) {
+  .DocSearch-Modal {
+    position: fixed;
+  }
+}
+
 // fix medium-zoom overlay z-index
 .medium-zoom-overlay,
 .medium-zoom-image--opened {
