@@ -10,6 +10,9 @@ import Footer from '../components/Footer.astro';
 import BackToTop from '../components/vue/BackToTop.vue';
 import ThemeProvider from "../components/ThemeProvider.astro";
 
+import DocSearch from "../components/DocSearch.astro";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -27,6 +30,14 @@ const {
 } = Astro.props;
 
 const ogImageURL = new URL(ogImage ?? "og-image.jpg", Astro.url.origin).href;
+
+const { 
+	PROD,
+	ALGOLIA_APP_ID,
+	ALGOLIA_APP_KEY,
+	ALGOLIA_INDEX_NAME,
+	GA4ID 
+} = import.meta.env;
 ---
 
 <!doctype html>
@@ -58,6 +69,7 @@ const ogImageURL = new URL(ogImage ?? "og-image.jpg", Astro.url.origin).href;
 		
 		<ViewTransitions />
 		<ThemeProvider />
+		{PROD && <GoogleAnalytics id={GA4ID} />}
 	</head>
 	<body>
 		<Header />
@@ -74,15 +86,10 @@ const ogImageURL = new URL(ogImage ?? "og-image.jpg", Astro.url.origin).href;
 		<BackToTop client:only="vue" />
 
 		<!-- docsearch -->
-		<script is:inline src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
-		<script is:inline type="text/javascript" data-astro-rerun>
-			docsearch({
-				appId: "LQ49897Q17",
-				apiKey: "6d9299b3fbdeec127738994dae7b0acc",
-				indexName: "deore",
-				container: '#docsearch',
-				debug: true 
-			});
-		</script>
+		<DocSearch
+			appId={ALGOLIA_APP_ID}
+			apiKey={ALGOLIA_APP_KEY}
+			indexName={ALGOLIA_INDEX_NAME}
+		/>
 	</body>
 </html>
