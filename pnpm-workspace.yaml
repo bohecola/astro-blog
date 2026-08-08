@@ -1,0 +1,12 @@
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  sharp: true
+
+overrides:
+  # zod-to-json-schema >=3.24 需要 zod 3.24+ 的 ./v3 导出，与 astro 4 使用的 zod 3.22 不兼容
+  zod-to-json-schema: 3.22.5
+  # shiki 1.1.2 的语言别名解析有 bug（如 ```md 报 Language not found），1.x 后续版本已修复
+  shiki: 1.29.2
+  # sitemap 3.7+ 依赖新版 astro 的 build:done 钩子数据结构，astro 4.5 下会崩
+  '@astrojs/sitemap': 3.1.6
