@@ -41,7 +41,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -65,7 +65,7 @@ const {
 		<meta property="og:image" content={ogImageURL} />
 
 		<!-- docsearch -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"/></pre></li>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"/>
 		
 		<ViewTransitions />
 		<ThemeProvider />
@@ -85,11 +85,15 @@ const {
 		<Footer />
 		<BackToTop client:only="vue" />
 
-		<!-- docsearch -->
-		<DocSearch
-			appId={ALGOLIA_APP_ID}
-			apiKey={ALGOLIA_APP_KEY}
-			indexName={ALGOLIA_INDEX_NAME}
-		/>
+		<!-- docsearch：环境变量缺失时（如本地无 .env）不加载，避免初始化报错 -->
+		{
+			ALGOLIA_APP_ID && ALGOLIA_APP_KEY && ALGOLIA_INDEX_NAME && (
+				<DocSearch
+					appId={ALGOLIA_APP_ID}
+					apiKey={ALGOLIA_APP_KEY}
+					indexName={ALGOLIA_INDEX_NAME}
+				/>
+			)
+		}
 	</body>
 </html>

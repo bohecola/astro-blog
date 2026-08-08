@@ -9,13 +9,22 @@ const projects = [
 <BaseLayout title="Projects">
   <h1>Projects</h1>
 
-    <ul class="">
+    <ul>
       {
         projects.map((project) => {
           return (
             <li>
               <a href={project.href} class="text-lg" target="_blank">
                 {project.name}
+              </a>
+              <a
+                title="Github"
+                href={project.github}
+                target="_blank"
+                aria-label={`${project.name} github repository`}
+                class="not-prose ml-2"
+              >
+                <span class="i-carbon-logo-github" />
               </a>
               <p class="text-sm">{project.desc}</p>
             </li>

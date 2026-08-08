@@ -60,9 +60,7 @@ const isActive = (href: string) => {
       </li>
   
       <li>
-        <a>
-          <ModeToggle />
-        </a>
+        <ModeToggle />
       </li>
     </ul>
   </nav>
@@ -72,7 +70,7 @@ const isActive = (href: string) => {
 <style lang="scss">
   header {
     nav {
-      a {
+      a, :global(#modeToggleBtn) {
         opacity: .7;
         transition: opacity .2s ease;
         &:hover, &.active {
