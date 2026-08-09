@@ -12,7 +12,7 @@ const { post, prefix = '/posts' } = Astro.props;
 
 <li class="mt-2 mb-6">
   <a href={`${prefix}/${post.id}`} class="group">
-    <span class="mr-2 text-lg decoration-dashed decoration-2 underline-offset-4 group-hover:underline">{post.data.title}</span>
+    <span class="mr-2 text-lg decoration-dashed decoration-2 underline-offset-[4px] group-hover:underline group-hover:decoration-sky-400">{post.data.title}</span>
     <br class="md:hidden">
     <span class="text-sm">{dayjs(post.data.pubDate).format('MMM DD, YYYY')}</span>
   </a>
