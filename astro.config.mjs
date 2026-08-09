@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
-
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from '@tailwindcss/vite';
 import mdx from "@astrojs/mdx";
 import vue from "@astrojs/vue";
 import react from "@astrojs/react";
@@ -12,12 +11,14 @@ import { SITE } from './src/config';
 export default defineConfig({
   site: SITE.website,
   integrations: [
-    tailwind(),
     mdx(),
     vue(),
     sitemap(),
     react()
   ],
+  vite: {
+    plugins: [tailwindcss()]
+  },
   markdown: {
     shikiConfig: {
       themes: {
