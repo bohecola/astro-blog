@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/* 基于 class 的暗色模式 */
+@variant dark (&:where(.dark, .dark *));
+
+/* 自定义字体 */
+@theme {
+  --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+}
+
+/* Typography 插件 */
+@plugin "@tailwindcss/typography";
+
+/* 图标插件 — 自动发现已安装的 @iconify-json/* 包 */
+@plugin "@egoist/tailwindcss-icons" {
+  scale: 1.2;
+}
+
+/* 背景模糊支持变体 */
+@custom-variant supports-backdrop-blur
+  (@supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)));
+
+/* bg-grid 背景网格 utilities */
+@utility bg-grid-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(15 23 42 / 0.04)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
+}
+@utility bg-grid-dark {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
+}
+
+/* 图标垂直对齐 */
+[class*='i-'] {
+  vertical-align: text-bottom;
+}
+
+/* prose 排版定制 */
+.prose a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-sky-300);
+}
+.prose a:hover {
+  border-bottom-width: 2px;
+}
+.prose code {
+  font-weight: 500;
+}
+.prose pre {
+  padding: calc(var(--spacing) * 5);
+  border-width: 1px;
+  border-color: #ECEBE8;
+  border-radius: var(--radius-md);
+}
+.dark .prose-invert a {
+  border-bottom-color: var(--color-sky-400);
+}
+.dark .prose-invert pre {
+  border-color: #201E1B;
+}
+
+/* ===== base.scss @layer 样式迁移（@apply 在 SCSS 编译后无法被 v4 处理）===== */
+
+@layer base {
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 5rem;
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+  }
+
+  h2, h3, h4, h5, h6 {
+    position: relative;
+
+    &:hover .header-anchor {
+      opacity: 0.5;
+    }
+  }
+
+  article img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@layer components {
+  /* 锚点样式 */
+  .header-anchor {
+    border: none !important;
+    float: left;
+    margin-left: -1.5rem;
+    padding-right: 0.5rem;
+    opacity: 0;
+    text-decoration: none;
+  }
+
+  .btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .tag {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  /* 标签颜色工具类 */
+  .emerald-normal {
+    color: white;
+    background-color: var(--color-emerald-600);
+    &:hover { background-color: var(--color-emerald-500); }
+  }
+
+  .cyan-active {
+    color: var(--color-cyan-400);
+    background-color: var(--color-cyan-700);
+    &:hover { background-color: var(--color-cyan-600); }
+    .dark & {
+      color: var(--color-cyan-500);
+      background-color: var(--color-cyan-900);
+      &:hover { background-color: var(--color-cyan-800); }
+    }
+  }
+
+  .sky-normal {
+    color: var(--color-sky-700);
+    background-color: color-mix(in oklch, var(--color-sky-700) 20%, transparent);
+    &:hover { color: var(--color-sky-600); }
+    .dark & {
+      color: var(--color-sky-600);
+      &:hover { color: var(--color-sky-500); }
+    }
+  }
+
+  .sky-active {
+    color: var(--color-sky-400);
+    background-color: var(--color-sky-700);
+    &:hover { background-color: var(--color-sky-600); }
+    .dark & {
+      color: var(--color-sky-500);
+      background-color: var(--color-sky-900);
+      &:hover { background-color: var(--color-sky-800); }
+    }
+  }
+
+  .green-normal {
+    color: var(--color-green-700);
+    background-color: color-mix(in oklch, var(--color-green-700) 20%, transparent);
+    &:hover { color: var(--color-green-600); }
+    .dark & {
+      color: var(--color-green-600);
+      &:hover { color: var(--color-green-500); }
+    }
+  }
+
+  .green-active {
+    color: var(--color-green-400);
+    background-color: var(--color-green-700);
+    &:hover { background-color: var(--color-green-600); }
+    .dark & {
+      color: var(--color-green-500);
+      background-color: var(--color-green-900);
+      &:hover { background-color: var(--color-green-800); }
+    }
+  }
+
+  .curtain {
+    position: absolute;
+    right: 0;
+    bottom: -33px;
+    width: 100%;
+    height: 2rem;
+
+    &::after {
+      display: block;
+      content: '';
+      width: 100%;
+      height: 2rem;
+      background-image: linear-gradient(to bottom, var(--bg), transparent);
+    }
+  }
+}
