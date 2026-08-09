@@ -12,14 +12,14 @@ interface Props {
 const { toc } = Astro.props;
 ---
 
-<aside id="toc" class="fixed top-[--headerH] right-0 transition-transform translate-x-full xl:translate-x-0 z-30 touch-none">
-  <div class="absolute flex items-center justify-center w-10 h-10 -translate-x-[100%] text-xl border-l border-b border-zinc-200 dark:border-zinc-800 bg-[--bg]">
+<aside id="toc" class="fixed top-(--headerH) right-0 transition-transform translate-x-full xl:translate-x-0 z-30 touch-none">
+  <div class="absolute flex items-center justify-center w-10 h-10 -translate-x-[100%] text-xl border-l border-b border-zinc-200 dark:border-zinc-800 bg-(--bg)">
     <button id="tocToggleBtn" class="i-tdesign-menu-unfold"></button>
   </div>
   <nav id="tocNav" class="
     py-5 w-[30ch] h-[calc(100vh-var(--headerH))] border-l border-l-zinc-200
     overflow-y-auto overscroll-contain scroll-bar
-    dark:border-l-zinc-800 bg-[--bg]">
+    dark:border-l-zinc-800 bg-(--bg)">
     <h2 class="mx-7 text-sm opacity-80">{toc.label}</h2>
     <TableOfContentsLists toc={toc.items} />
   </nav>
@@ -37,7 +37,8 @@ const { toc } = Astro.props;
 
     const oMain = document.querySelector('main');
     const oMask = document.createElement('div');
-    oMask.className = `fixed inset-0 w-screen h-[calc(100vh-var(--headerH))] top-[--headerH] bg-black bg-opacity-50 z-20 touch-none`;
+    oMask.className = `fixed inset-0 w-screen h-[calc(100vh-var(--headerH))] bg-black/50 z-20 touch-none`;
+    oMask.style.top = 'var(--headerH)';
 
     const xl = 1280;
     let isFold = window.innerWidth < xl;
