@@ -51,11 +51,13 @@
   border-color: #ECEBE8;
   border-radius: var(--radius-md);
 }
-.dark .prose-invert a {
-  border-bottom-color: var(--color-sky-400);
-}
-.dark .prose-invert pre {
-  border-color: #201E1B;
+@variant dark {
+  .prose a {
+    border-bottom-color: var(--color-sky-400);
+  }
+  .prose pre {
+    border-color: #201E1B;
+  }
 }
 
 /* ===== base.scss @layer 样式迁移（@apply 在 SCSS 编译后无法被 v4 处理）===== */

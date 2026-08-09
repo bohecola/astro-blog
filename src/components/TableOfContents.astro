@@ -13,13 +13,13 @@ const { toc } = Astro.props;
 ---
 
 <aside id="toc" class="fixed top-[--headerH] right-0 transition-transform translate-x-full xl:translate-x-0 z-30 touch-none">
-  <div class="absolute flex items-center justify-center w-10 h-10 -translate-x-[100%] text-xl border-l border-b dark:border-zinc-800 bg-[--bg]">
+  <div class="absolute flex items-center justify-center w-10 h-10 -translate-x-[100%] text-xl border-l border-b border-zinc-200 dark:border-zinc-800 bg-[--bg]">
     <button id="tocToggleBtn" class="i-tdesign-menu-unfold"></button>
   </div>
   <nav id="tocNav" class="
-    py-5 w-[30ch] h-[calc(100vh-var(--headerH))] border-l
+    py-5 w-[30ch] h-[calc(100vh-var(--headerH))] border-l border-l-zinc-200
     overflow-y-auto overscroll-contain scroll-bar
-    dark:border-zinc-800 bg-[--bg]">
+    dark:border-l-zinc-800 bg-[--bg]">
     <h2 class="mx-7 text-sm opacity-80">{toc.label}</h2>
     <TableOfContentsLists toc={toc.items} />
   </nav>
