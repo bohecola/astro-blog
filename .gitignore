@@ -26,3 +26,9 @@ pnpm-debug.log*
 .vercel
 .env*.local
 .env*
+
+# playwright MCP local artifacts
+.playwright-mcp/
+
+# local screenshots
+homepage.png
