@@ -12,7 +12,7 @@ const { toc } = Astro.props;
     toc && toc.map((heading) => (
       <li class="max-w-30ch text-sm">
         <a href={'#' + heading.slug} class="font-mono opacity-80 hover:opacity-100">
-          <span class="opacity-50">{heading.depth > 2 ? '>' : '#'}</span>
+          <span class="opacity-50 mr-1">{heading.depth > 2 ? '>' : '#'}</span>
           <span>{heading.text}</span>
         </a>
         {heading.children.length > 0 && (
