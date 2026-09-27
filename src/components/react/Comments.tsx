@@ -1,34 +1,33 @@
-import Giscus from "@giscus/react";
-import { useEffect, useState } from "react";
+import Giscus from '@giscus/react'
+import { useEffect, useState } from 'react'
 
-const { 
+const {
   PUBLIC_GISCUS_USERNAME,
   PUBLIC_GISCUS_REPO,
   PUBLIC_GISCUS_REPO_ID,
-  PUBLIC_GISCUS_CATEGORY_ID
-} = import.meta.env;
+  PUBLIC_GISCUS_CATEGORY_ID,
+} = import.meta.env
 
 // 得到主题
 function getCurrentTheme() {
-  const storedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('theme');
-  return storedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const storedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('theme')
+  return storedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
 }
 
-export default function Comments () {
-  const initialTheme = getCurrentTheme();
-
-  const themeChangeHandler = ({ detail: { themeValue } }: CustomEvent<ThemeData>) => {
-    setTheme(themeValue);
-  }
-  const [theme, setTheme] = useState(initialTheme);
+export default function Comments() {
+  const [theme, setTheme] = useState(getCurrentTheme)
 
   useEffect(() => {
-    window.addEventListener("app:themechange", themeChangeHandler);
+    const themeChangeHandler = ({ detail: { themeValue } }: CustomEvent<ThemeData>) => {
+      setTheme(themeValue)
+    }
+
+    window.addEventListener('app:themechange', themeChangeHandler)
 
     return () => {
-      window.removeEventListener("app:themechange", themeChangeHandler);
-    };
-  }, []);
+      window.removeEventListener('app:themechange', themeChangeHandler)
+    }
+  }, [])
 
   return (
     <div>
@@ -47,5 +46,5 @@ export default function Comments () {
         theme={theme}
       />
     </div>
-  );
+  )
 }

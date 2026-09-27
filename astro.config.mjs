@@ -1,11 +1,11 @@
-import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
-import mdx from "@astrojs/mdx";
-import vue from "@astrojs/vue";
-import react from "@astrojs/react";
-import sitemap from "@astrojs/sitemap";
+import mdx from '@astrojs/mdx'
+import react from '@astrojs/react'
+import sitemap from '@astrojs/sitemap'
+import vue from '@astrojs/vue'
+import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'astro/config'
 
-import { SITE } from './src/config';
+import { SITE } from './src/config'
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,17 +14,17 @@ export default defineConfig({
     mdx(),
     vue(),
     sitemap(),
-    react()
+    react(),
   ],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
   markdown: {
     shikiConfig: {
       themes: {
         light: 'vitesse-light',
-        dark: 'vitesse-black'
-      }
-    }
-  }
-});
+        dark: 'vitesse-black',
+      },
+    },
+  },
+})

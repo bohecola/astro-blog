@@ -1,40 +1,39 @@
 ---
 
-import { getCollection } from 'astro:content';
-import { sortByDate } from '../../utils';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogPost from '../../components/BlogPost.astro';
-import GoBack from '../../components/GoBack.astro';
+import { getCollection } from 'astro:content'
+import BlogPost from '../../components/BlogPost.astro'
+import GoBack from '../../components/GoBack.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { sortByDate } from '../../utils'
 
 export async function getStaticPaths() {
-
   // 获取所有文章
   const posts = await getCollection('posts', ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
-  });
+    return import.meta.env.PROD ? data.draft !== true : true
+  })
 
   // 倒叙
-  const descPosts = sortByDate(posts);
+  const descPosts = sortByDate(posts)
 
   // 获取所有标签
-  const uniqueTags = [...new Set(posts.map((post) => post.data.tags).flat())]
+  const uniqueTags = [...new Set(posts.map(post => post.data.tags).flat())]
 
   // 生成标签的路径
   return uniqueTags.map((tag) => {
     // 根据当前的标签过滤出对应的文章
-    const filteredPosts = descPosts.filter((post) => 
-      post.data.tags.includes(tag)
-    );
+    const filteredPosts = descPosts.filter(post =>
+      post.data.tags.includes(tag),
+    )
 
     return {
       params: { tag },
-      props: { posts: filteredPosts }
+      props: { posts: filteredPosts },
     }
-  });
+  })
 }
 
-const { tag } = Astro.params;
-const { posts } = Astro.props;
+const { tag } = Astro.params
+const { posts } = Astro.props
 ---
 
 <BaseLayout title={tag}>

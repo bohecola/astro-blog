@@ -8,20 +8,22 @@ interface Props {
   id: string
 }
 
-const { id } = Astro.props;
+const { id } = Astro.props
 
-const url = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+const url = `https://www.googletagmanager.com/gtag/js?id=${id}`
 ---
 
 <script async src={url} is:inline>
   // _
 </script>
 
-<script is:inline define:vars={{ id: id }}>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){
-    dataLayer.push(arguments);
-  }
-  gtag('js', new Date());
-  gtag('config', id);
+<script is:inline define:vars={{ id }}>
+window.dataLayer = window.dataLayer || []
+function gtag() {
+  // gtag.js 要求推入 arguments 对象本身，改成剩余参数（数组）会导致上报失效
+  // eslint-disable-next-line prefer-rest-params
+  dataLayer.push(arguments)
+}
+gtag('js', new Date())
+gtag('config', id)
 </script>

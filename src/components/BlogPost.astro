@@ -1,19 +1,19 @@
 ---
-import dayjs from 'dayjs';
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content'
+import dayjs from 'dayjs'
 
 interface Props {
-  post: CollectionEntry<'posts'>,
+  post: CollectionEntry<'posts'>
   prefix?: string
 }
 
-const { post, prefix = '/posts' } = Astro.props;
+const { post, prefix = '/posts' } = Astro.props
 ---
 
 <li class="mt-2 mb-6">
   <a href={`${prefix}/${post.id}`} class="group">
     <span class="mr-2 text-lg decoration-dashed decoration-2 underline-offset-[4px] group-hover:underline">{post.data.title}</span>
-    <br class="md:hidden">
+    <br class="md:hidden" />
     <span class="text-sm">{dayjs(post.data.pubDate).format('MMM DD, YYYY')}</span>
   </a>
 </li>

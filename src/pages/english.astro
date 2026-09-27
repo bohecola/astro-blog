@@ -1,12 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
-import { sortByDate } from '../utils';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import BlogPost from '../components/BlogPost.astro';
+import { getCollection } from 'astro:content'
+import BlogPost from '../components/BlogPost.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { sortByDate } from '../utils'
 
 const posts = sortByDate(await getCollection('english', ({ data }) => {
-  return import.meta.env.PROD ? data.draft !== true : true;
-}));
+  return import.meta.env.PROD ? data.draft !== true : true
+}))
 ---
 
 <BaseLayout title="English Learning">
@@ -17,7 +17,7 @@ const posts = sortByDate(await getCollection('english', ({ data }) => {
       {
         posts.map((post) => {
           return (
-            <BlogPost prefix='/english' post={post} />
+            <BlogPost prefix="/english" post={post} />
           )
         })
       }

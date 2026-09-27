@@ -1,5 +1,5 @@
 interface ThemeData {
-  themeValue: string;
+  themeValue: string
 }
 
 interface WindowEventMap {

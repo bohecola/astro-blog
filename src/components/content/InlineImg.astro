@@ -1,15 +1,15 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from 'astro:assets'
 
 interface Props {
-  src: string;
-  alt: string;
-  width: number | `${number}`;
-  height: number | `${number}`;
-  format: string;
+  src: string
+  alt: string
+  width: number | `${number}`
+  height: number | `${number}`
+  format: string
 }
 
-const { src, alt, width = '20' , height = '20', format = 'webp' } = Astro.props
+const { src, alt, width = '20', height = '20', format = 'webp' } = Astro.props
 ---
 
 <Image

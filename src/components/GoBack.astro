@@ -1,39 +1,39 @@
 ---
 function useParentPath() {
   // 获取当前路径
-  const { pathname } = Astro.url;
+  const { pathname } = Astro.url
 
   // 去除尾斜线（build 时 Astro.request.url 会自动加上尾斜线）
-  const path = pathname !== '/' && pathname.endsWith('/') 
+  const path = pathname !== '/' && pathname.endsWith('/')
     ? pathname.replace(/\/$/, '')
-    : pathname; 
+    : pathname
 
   // 父级路径
-  let parentPath = "/";
+  let parentPath = '/'
 
   // 是否存在二级以上的路径
-  const isMulti = (path.match(/\//g) || []).length >= 2;
+  const isMulti = (path.match(/\//g) || []).length >= 2
 
-	// 多级路径
-	if (isMulti) {
-		// 截取路径
-		const slicedPath = path.replace(/\/[^\/]+$/, '');
+  // 多级路径
+  if (isMulti) {
+    // 截取路径
+    const slicedPath = path.replace(/\/[^/]+$/, '')
     // 虚路径
-    const virtualPath = ["/posts", "/tags"];
+    const virtualPath = ['/posts', '/tags']
     // 不是虚路径（虚路径是父级路径为根路径的情况）
     if (!virtualPath.includes(slicedPath)) {
       // 返回父级路径
-      parentPath = slicedPath;
+      parentPath = slicedPath
     }
-	}
+  }
 
   return {
     isMulti,
     parentPath,
-  };
+  }
 }
 
-const { isMulti, parentPath } = useParentPath();
+const { isMulti, parentPath } = useParentPath()
 ---
 
 {

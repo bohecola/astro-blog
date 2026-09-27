@@ -1,19 +1,20 @@
 ---
-import { getCollection, render } from "astro:content";
-import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
-import TableOfContents from "../../components/TableOfContents.astro";
-import { getToC } from "../../utils/generateToC";
+import { getCollection, render } from 'astro:content'
+import TableOfContents from '../../components/TableOfContents.astro'
+import MarkdownPostLayout from '../../layouts/MarkdownPostLayout.astro'
+import { getToC } from '../../utils/generateToC'
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('english');
+  const blogEntries = await getCollection('english')
   return blogEntries.map(entry => ({
-    params: { slug: entry.id }, props: { entry }
-  }));
+    params: { slug: entry.id },
+    props: { entry },
+  }))
 }
 
-const { entry } = Astro.props;
-const { Content, headings } = await render(entry);
-const toc = getToC(headings);
+const { entry } = Astro.props
+const { Content, headings } = await render(entry)
+const toc = getToC(headings)
 ---
 
 <MarkdownPostLayout frontmatter={entry.data}>

@@ -1,10 +1,10 @@
 ---
 interface Props {
-  appId: string;
-  apiKey: string;
-  indexName: string;
-  container?: string;
-  debug?: boolean;
+  appId: string
+  apiKey: string
+  indexName: string
+  container?: string
+  debug?: boolean
 }
 
 const {
@@ -12,18 +12,18 @@ const {
   apiKey,
   indexName,
   container = '#docsearch',
-  debug = false
-} = Astro.props;
+  debug = false,
+} = Astro.props
 ---
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
 <script is:inline define:vars={{ appId, apiKey, indexName, container, debug }}>
-  // DocSearch 会在视图过渡后随容器一起被替换而丢失；这里改用 astro:page-load 重新挂载。
-  // 不用 data-astro-rerun：它和 define:vars 组合时会在构建阶段被丢弃。
-  if (!window.__docsearchInitialized) {
-    window.__docsearchInitialized = true;
-    document.addEventListener('astro:page-load', () => {
-      docsearch({ appId, apiKey, indexName, container, debug });
-    });
-  }
+// DocSearch 会在视图过渡后随容器一起被替换而丢失；这里改用 astro:page-load 重新挂载。
+// 不用 data-astro-rerun：它和 define:vars 组合时会在构建阶段被丢弃。
+if (!window.__docsearchInitialized) {
+  window.__docsearchInitialized = true
+  document.addEventListener('astro:page-load', () => {
+    docsearch({ appId, apiKey, indexName, container, debug })
+  })
+}
 </script>

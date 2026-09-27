@@ -1,23 +1,23 @@
 ---
-import { getCollection } from 'astro:content';
-import { sortByDate } from '../utils';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Tag from '../components/Tag.astro';
-import BlogPost from '../components/BlogPost.astro';
+import { getCollection } from 'astro:content'
+import BlogPost from '../components/BlogPost.astro'
+import Tag from '../components/Tag.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { sortByDate } from '../utils'
 
 // 获取所有文章
 const posts = await getCollection('posts', ({ data }) => {
-  return import.meta.env.PROD ? data.draft !== true : true;
+  return import.meta.env.PROD ? data.draft !== true : true
 })
 
 // 倒叙
-const descPosts = sortByDate(posts);
+const descPosts = sortByDate(posts)
 
 // 升序
-const ascPosts = sortByDate(posts, 'asc');
+const ascPosts = sortByDate(posts, 'asc')
 
 // 标签
-const tags = [...new Set(ascPosts.map((post) => post.data.tags).flat())];
+const tags = [...new Set(ascPosts.map(post => post.data.tags).flat())]
 ---
 
 <BaseLayout title="Home">

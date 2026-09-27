@@ -1,100 +1,100 @@
 ---
-import { SITE, OG } from "@/config";
+import { ClientRouter } from 'astro:transitions'
 
-import '../styles/tailwind.css';
-import "@fontsource/dm-mono";
-import '../styles/base.scss';
+import { OG, SITE } from '@/config'
+import DocSearch from '../components/DocSearch.astro'
+import Footer from '../components/Footer.astro'
 
-import { ClientRouter } from "astro:transitions";
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import BackToTop from '../components/vue/BackToTop.vue';
-import ThemeProvider from "../components/ThemeProvider.astro";
+import GoogleAnalytics from '../components/GoogleAnalytics.astro'
+import Header from '../components/Header.astro'
+import ThemeProvider from '../components/ThemeProvider.astro'
+import BackToTop from '../components/vue/BackToTop.vue'
+import '../styles/tailwind.css'
 
-import DocSearch from "../components/DocSearch.astro";
-import GoogleAnalytics from "../components/GoogleAnalytics.astro";
+import '@fontsource/dm-mono'
+import '../styles/base.scss'
 
 interface Props {
-	title?: string;
-	description?: string;
-	author?: string;
-	ogImage?:  string;
-	canonicalURL?: string;
+  title?: string
+  description?: string
+  author?: string
+  ogImage?: string
+  canonicalURL?: string
 }
 
-const { 
+const {
   title = SITE.title,
   author = SITE.author,
   description = SITE.desc,
-	ogImage = OG.ogImage,
-	canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
-} = Astro.props;
+  ogImage = OG.ogImage,
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+} = Astro.props
 
-const ogImageURL = new URL(ogImage ?? "og-image.jpg", Astro.url.origin).href;
+const ogImageURL = new URL(ogImage ?? 'og-image.jpg', Astro.url.origin).href
 
-const { 
-	PROD,
-	ALGOLIA_APP_ID,
-	ALGOLIA_APP_KEY,
-	ALGOLIA_INDEX_NAME,
-	GA4ID 
-} = import.meta.env;
+const {
+  PROD,
+  ALGOLIA_APP_ID,
+  ALGOLIA_APP_KEY,
+  ALGOLIA_INDEX_NAME,
+  GA4ID,
+} = import.meta.env
 ---
 
 <!doctype html>
 <html lang="zh-CN">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
 
-		<link rel="canonical" href={canonicalURL} />
-		<!-- rss auto discovery -->
-		<link rel="alternate" type="application/rss+xml" title={SITE.title} href={`${SITE.website}rss.xml`} />
+    <link rel="canonical" href={canonicalURL} />
+    <!-- rss auto discovery -->
+    <link rel="alternate" type="application/rss+xml" title={SITE.title} href={`${SITE.website}rss.xml`} />
 
     <!-- General Meta Tags -->
-		<title>{title}</title>
+    <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
 
-		<!-- Open Graph -->
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:url" content={canonicalURL} />
-		<meta property="og:image" content={ogImageURL} />
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
 
-		<!-- docsearch -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"/>
-		
-		<ClientRouter />
-		<ThemeProvider />
-		{PROD && <GoogleAnalytics id={GA4ID} />}
-	</head>
-	<body>
-		<Header />
-		<!-- 主要区块 -->
-		<main class="relative px-7 py-10 overflow-x-hidden border-b border-b-slate-900/5 dark:border-b-slate-100/5">
-			<!-- 网格背景 -->
-			<div class="absolute inset-0 bg-grid-light dark:bg-grid-dark bg-bottom"></div>
-			<!-- prose 样式 -->
-			<div class="relative mx-auto prose dark:prose-invert prose-img:rounded prose-img:border">
-				<slot />
-			</div>
-		</main>
-		<Footer />
-		<BackToTop client:only="vue" />
+    <!-- docsearch -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
 
-		<!-- docsearch：环境变量缺失时（如本地无 .env）不加载，避免初始化报错 -->
-		{
-			ALGOLIA_APP_ID && ALGOLIA_APP_KEY && ALGOLIA_INDEX_NAME && (
-				<DocSearch
-					appId={ALGOLIA_APP_ID}
-					apiKey={ALGOLIA_APP_KEY}
-					indexName={ALGOLIA_INDEX_NAME}
-				/>
-			)
-		}
-	</body>
+    <ClientRouter />
+    <ThemeProvider />
+    {PROD && <GoogleAnalytics id={GA4ID} />}
+  </head>
+  <body>
+    <Header />
+    <!-- 主要区块 -->
+    <main class="relative px-7 py-10 overflow-x-hidden border-b border-b-slate-900/5 dark:border-b-slate-100/5">
+      <!-- 网格背景 -->
+      <div class="absolute inset-0 bg-grid-light dark:bg-grid-dark bg-bottom"></div>
+      <!-- prose 样式 -->
+      <div class="relative mx-auto prose dark:prose-invert prose-img:rounded prose-img:border">
+        <slot />
+      </div>
+    </main>
+    <Footer />
+    <BackToTop client:only="vue" />
+
+    <!-- docsearch：环境变量缺失时（如本地无 .env）不加载，避免初始化报错 -->
+    {
+      ALGOLIA_APP_ID && ALGOLIA_APP_KEY && ALGOLIA_INDEX_NAME && (
+        <DocSearch
+          appId={ALGOLIA_APP_ID}
+          apiKey={ALGOLIA_APP_KEY}
+          indexName={ALGOLIA_INDEX_NAME}
+        />
+      )
+    }
+  </body>
 </html>
