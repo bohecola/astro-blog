@@ -1,5 +1,4 @@
 import type { MarkdownHeading } from "astro";
-import { PAGE_TITLE_ID } from "../constants";
 
 export interface TocItem extends MarkdownHeading {
   children: TocItem[];
@@ -8,18 +7,15 @@ export interface TocItem extends MarkdownHeading {
 interface TocOpts {
   minHeadingLevel: number;
   maxHeadingLevel: number;
-  title: string;
 }
 
 // 将Astro生成的平面标题数组转换为嵌套树结构
 export function generateToC(
   headings: MarkdownHeading[],
-  { minHeadingLevel, maxHeadingLevel, title }: TocOpts
+  { minHeadingLevel, maxHeadingLevel }: TocOpts
 ) {
   headings = headings.filter(({ depth }) => depth >= minHeadingLevel && depth <= maxHeadingLevel);
-  const toc: TocItem[] = [
-    // { depth: 2, slug: PAGE_TITLE_ID, text: title, children: [] }
-  ];
+  const toc: TocItem[] = [];
   for (const heading of headings) {
     injectChild(toc, { ...heading, children: [] });
   }
@@ -44,7 +40,7 @@ export function getToC(headings: MarkdownHeading[]) {
   };
 
   return {
-    items: generateToC(headings, { ...tocConfig, title: 'overview' }),
+    items: generateToC(headings, tocConfig),
     label: 'On This Page'
   };
 }

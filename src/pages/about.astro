@@ -3,6 +3,7 @@ import { getEntry, render } from "astro:content";
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const about = await getEntry('other', 'about');
+if (!about) throw new Error('Missing content: src/content/other/about.mdx');
 
 const { Content } = await render(about);
 ---
