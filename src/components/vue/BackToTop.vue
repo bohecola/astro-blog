@@ -26,7 +26,7 @@ function backToTop() {
       w-10 h-10 text-center rounded-full
       opacity-30 hover:opacity-100
       transition-all duration-300
-      z-20 hover:bg-[#88888833]
+      z-40 cursor-pointer hover:bg-[#88888833]
     "
     :class="isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'"
     @click="backToTop"
